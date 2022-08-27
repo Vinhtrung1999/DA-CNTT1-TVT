@@ -1,0 +1,9 @@
+const app = require('./app')
+const port = 3000
+
+app.listen(port, () => console.log(`
+-----------------------------------------------------------------------
+     Running at: http://localhost:${port}
+     Runtime environment: development
+-----------------------------------------------------------------------
+`))

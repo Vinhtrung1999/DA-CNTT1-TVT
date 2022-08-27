@@ -1,0 +1,162 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single-sidebar">
+                    <h2 class="sidebar-title">Products</h2>
+                    <% locals.dataView.forEach((val)=> {%>
+                        <div class="thubmnail-recent">
+                            <img src="<%= val.img1 %>" class="recent-thumb" alt="">
+                            <h2>
+                                <a href="/single-product?toyID=<%= val.toyID %>">
+                                    <%= val.toyName %>
+                                </a>
+                            </h2>
+                            <div class="product-sidebar-price">
+                                <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                            </div>
+                        </div>
+                        <%})%>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="product-content-right">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img src="<%= locals.dataToy.img1 %>" alt="" id="img1">
+                                </div>
+
+                                <div class="product-gallery">
+                                    <img src="<%= locals.dataToy.img1 %>" alt="">
+                                    <img src="<%= locals.dataToy.img1 %>" alt="">
+                                    <img src="<%= locals.dataToy.img1 %>" alt="">
+                                    <img src="<%= locals.dataToy.img1 %>" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="product-inner">
+                                <h2 class="product-name" id="toyName">
+                                    <%= locals.dataToy.toyName %>
+                                </h2>
+                                <div class="product-inner-price">
+                                    <ins id="price">$<%= locals.dataToy.price %></ins> <del>$<%= locals.dataToy.price +
+                                            locals.dataToy.price*20/100 %></del>
+                                </div>
+
+                                <form action="" class="cart">
+                                    <div class="quantity">
+                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
+                                            name="quantity" min="1" step="1" id="qty">
+                                    </div>
+                                    <button id="btn_add_to_cart" class="add_to_cart_button" type="submit"
+                                        data-id="<%= locals.dataToy.toyID %>" data-name="<%= locals.dataToy.toyName %>"
+                                        data-price="<%= locals.dataToy.price %>">Add to
+                                        cart</button>
+                                </form>
+
+                                <div role="tabpanel">
+                                    <div class="tab-content">
+                                        <h4 class="product-tab">
+                                            Description
+                                        </h4>
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <p>
+                                                <%= locals.dataToy.descToy %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="related-products-wrapper">
+                        <h2 class="related-products-title">Related Products</h2>
+                        <div class="related-products-carousel">
+                            <% locals.dataRelated.forEach((val)=> {%>
+                                <div class="single-product">
+                                    <div class="product-f-image">
+                                        <img src="<%= val.img1 %>" alt="">
+                                        <div class="product-hover">
+                                            <a href="/single-product?toyID=<%= val.toyID %>" class="add-to-cart-link">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </a>
+                                            <a href="/single-product?toyID=<%= val.toyID %>" class="view-details-link">
+                                                <i class="fa fa-link"></i>
+                                                See details
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <h2>
+                                        <a href="/single-product?toyID=<%= val.toyID %>">
+                                            <%= val.toyName %>
+                                        </a>
+                                    </h2>
+
+                                    <div class="product-carousel-price">
+                                        <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                                    </div>
+                                </div>
+
+                                <%})%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let btn_add_to_cart = document.getElementById('btn_add_to_cart')
+    btn_add_to_cart.addEventListener('click', (e) => {
+        e.preventDefault()
+        let cart = JSON.parse(localStorage.getItem('cart')) || []
+        let toy = {
+            toyID: e.target.dataset.id,
+            toyName: e.target.dataset.name,
+            img1: document.getElementById('img1').getAttribute('src'),
+            price: parseFloat(e.target.dataset.price),
+            qty: parseInt(document.getElementById('qty').value)
+        }
+        check = cart.find(val => val.toyID == toy.toyID)
+        if (check) {
+            cart.forEach((val, index) => {
+
+                if (val.toyID == toy.toyID) {
+                    val.qty = val.qty + toy.qty
+                }
+            })
+        }
+        else {
+            console.log('02');
+            cart = [...cart, toy]
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+        swal("Add to cart successfully", "You click the button to continue!", "success")
+            .then(() => {
+                window.location.href = ''
+            })
+    })
+</script>

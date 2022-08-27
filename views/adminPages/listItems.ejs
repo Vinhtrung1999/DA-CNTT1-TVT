@@ -1,0 +1,90 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>
+                        List items
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <table class="table table-bordered" style="font-size: 18px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ITEM NAME</th>
+                        <th>TYPE</th>
+                        <th>QUANTITY</th>
+                        <th>ORIGINAL</th>
+                        <th>PRICE</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% locals.listItems.forEach(val=> {%>
+                        <tr>
+                            <th>
+                                <%= val.toyID %>
+                            </th>
+                            <td>
+                                <%= val.toyName %>
+                            </td>
+                            <td>
+                                <%= val.typeName %>
+                            </td>
+                            <td>
+                                <%= val.qty %>
+                            </td>
+                            <td>
+                                <%= val.origin %>
+                            </td>
+                            <td>
+                                <%= val.price %>$
+                            </td>
+                            <td>
+                                <a href="/admin/itemDetails?toyID=<%= val.toyID %>">
+                                    <button type="button" class="btn btn-info">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+
+                            </td>
+                        </tr>
+                        <% })%>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="?pageNow=<%= locals.pageNow - 1 %>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(i=1; i <=locals.countPage; i++){%>
+                                <li class="<%= pageNow === i ? 'active': ''%>"><a href="?pageNow=<%= i %>">
+                                        <%= i %>
+                                    </a></li>
+                                <%}%>
+                                    <li>
+                                        <a href="?pageNow=<%= locals.pageNow + 1 %>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>
+                        <%= locals.dataBill.saleBillID %>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="bill-info text-center" style="font-size: 20px">
+            <% if(locals.dataBill.statusBill){%>
+                <div class="text-success" style="font-size: 25px; border: solid 1px; width: 40%; margin: auto;">
+                    Completed
+                </div>
+                <%} else {%>
+                    <div class="text-danger" style="font-size: 25px; border: solid 1px; width: 40%; margin: auto;">
+                        Waiting
+                    </div>
+                    <%}%>
+                        <br>
+                        <div>Customer name: <%= locals.dataBill.customerName %>
+                        </div>
+                        <div>
+                            Address: <%= locals.dataBill.address %>
+                        </div>
+                        <div>
+                            Phone number: <%= locals.dataBill.phone %>
+                        </div>
+                        <br>
+                        <% if(locals.dataBill.statusBill) {%>
+                            <div>
+                                Staff ID: <%= locals.dataBill.staffID %>
+                            </div>
+                            <%}%>
+                                <div>Date: <%= locals.dataBill.saleDate %>
+                                </div>
+                                <div>Total: <b>
+                                        <%= locals.dataBill.total %>$
+                                    </b></div>
+        </div>
+        <br>
+        <table class="table table-bordered" style="font-size: 18px;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>price</th>
+                    <th>total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%locals.dataDetails.forEach((val, i)=> { %>
+                    <tr>
+                        <td>
+                            <%= i + 1 %>
+                        </td>
+                        <td>
+                            [-<%= val.toyID %>-] <%= val.toyName %>
+                        </td>
+                        <td>
+                            <%= val.qty %>
+                        </td>
+                        <td>
+                            <%= val.price %>$
+                        </td>
+                        <td>
+                            <%= val.total %>$
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+        </table>
+        <%if(!locals.dataBill.statusBill){%>
+            <div class="text-center">
+                <button data-id="<%= dataBill.saleBillID %>" type="button" class="btn btn-success btn_update">
+                    <i data-id="<%= dataBill.saleBillID %>" class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                <button data-id="<%= dataBill.saleBillID %>" type="button" class="btn btn-danger btn_delete">
+                    <i data-id="<%= dataBill.saleBillID %>" class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+            </div>
+            <%}%>
+    </div>
+</div>
+<script>
+    //update
+    let btn_update = document.querySelectorAll('.btn_update')
+    for (let i = 0; i < btn_update.length; i++) {
+        btn_update[i].addEventListener('click', (e) => {
+            let saleBillID = e.target.dataset.id
+            fetch('/admin/doneBill', {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ saleBillID })
+            })
+                .then(data => data.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.code === 0) {
+                        alert(`You have been completed ${saleBillID}`)
+                        window.location.href = ''
+                    }
+                    if (data.code === 3) {
+                        alert(data.message)
+                    }
+                })
+                .catch(err => console.log(err))
+        })
+    }
+
+    //delete
+    let btn_delete = document.getElementsByClassName('btn_delete')
+    for (let i = 0; i < btn_delete.length; i++) {
+        btn_delete[i].addEventListener('click', (e) => {
+            let saleBillID = e.target.dataset.id
+            fetch('/admin/deleteOrderBill', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ saleBillID })
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        alert(`You have been deleted ${saleBillID}`)
+                        window.location.href = ''
+                    }
+                })
+                .catch(err => console.log(err))
+        })
+    }
+</script>

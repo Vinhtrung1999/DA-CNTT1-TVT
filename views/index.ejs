@@ -1,0 +1,284 @@
+<div class="slider-area">
+    <div class="zigzag-bottom"></div>
+    <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
+
+        <div class="slide-bulletz">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="carousel-indicators slide-indicators">
+                            <li data-target="#slide-list" data-slide-to="0" class="active"></li>
+                            <li data-target="#slide-list" data-slide-to="1"></li>
+                            <li data-target="#slide-list" data-slide-to="2"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="single-slide">
+                    <div class="slide-bg slide-one"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>We are awesome</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Consequuntur, dolorem, excepturi. Dolore aliquam quibusdam ut quae
+                                                iure vero exercitationem ratione!</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi ab
+                                                molestiae minus reiciendis! Pariatur ab rerum, sapiente ex nostrum
+                                                laudantium.</p>
+                                            <a href="" class="readmore">Learn more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="single-slide">
+                    <div class="slide-bg slide-two"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>We are great</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
+                                                aspernatur, dolorum harum molestias tempora deserunt voluptas
+                                                possimus quos eveniet, vitae voluptatem accusantium atque deleniti
+                                                inventore. Enim quam placeat expedita! Quibusdam!</p>
+                                            <a href="" class="readmore">Learn more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="single-slide">
+                    <div class="slide-bg slide-three"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>We are superb</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores,
+                                                eius?</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
+                                                voluptates necessitatibus dicta recusandae quae amet nobis sapiente
+                                                explicabo voluptatibus rerum nihil quas saepe, tempore error odio
+                                                quam obcaecati suscipit sequi.</p>
+                                            <a href="" class="readmore">Learn more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> <!-- End slider area -->
+
+<div class="promo-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-refresh"></i>
+                    <p>30 Days return</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-truck"></i>
+                    <p>Free shipping</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-lock"></i>
+                    <p>Secure payments</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-gift"></i>
+                    <p>New products</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End promo area -->
+
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Products</h2>
+                    <div class="product-carousel">
+                        <% dataToys.forEach(val=> { %>
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="<%= val.img1 %>" alt="">
+                                    <div class="product-hover">
+                                        <a href="/single-product?toyID=<%= val.toyID %>" class="add-to-cart-link">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            Add to cart
+                                        </a>
+                                        <a href="/single-product?toyID=<%= val.toyID %>" class="view-details-link">
+                                            <i class="fa fa-link"></i>
+                                            See details
+                                        </a>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <a href="/single-product?toyID=<%= val.toyID %>">
+                                        <%= val.toyName%>
+                                    </a>
+                                </h2>
+                                <div class="product-carousel-price">
+                                    <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                                </div>
+                            </div>
+                            <% })%>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End main content area -->
+
+<div class="brands-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="brand-wrapper">
+                    <h2 class="section-title">Brands</h2>
+                    <div class="brand-list">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/2048px-LEGO_logo.svg.png"
+                            alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Hasbro_4c_no_R.png" alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Mattel-brand.svg" alt="">
+                        <img src="http://cdn.shopify.com/s/files/1/1885/4211/collections/Schleich-logo_164f5cac-9ac7-4455-b36c-061b63380ac6_1200x1200.jpg?v=1572925458"
+                            alt="">
+                        <img src="https://yt3.ggpht.com/ytc/AMLnZu_PzQIQz-__JrQwbkTuiQyRbkxBGhucCdrSLM8d=s900-c-k-c0x00ffffff-no-rj"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End brands area -->
+
+<div class="product-widget-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Top Sellers</h2>
+                    <a href="/listToys" class="wid-view-more">View All</a>
+                    <% locals.dataTopSale.forEach((val)=> {%>
+                        <div class="single-wid-product">
+                            <a href="/single-product?toyID=<%= val.toyID %>">
+                                <img src="<%= val.img1 %>" alt="" class="product-thumb">
+                            </a>
+                            <h2>
+                                <a href="/single-product?toyID=<%= val.toyID %>">
+                                    <%= val.toyName%>
+                                </a>
+                            </h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Top Viewed</h2>
+                    <a href="/listToys" class="wid-view-more">View All</a>
+                    <% locals.dataTopView.forEach((val)=> {%>
+                        <div class="single-wid-product">
+                            <a href="/single-product?toyID=<%= val.toyID %>">
+                                <img src="<%= val.img1 %>" alt="" class="product-thumb">
+                            </a>
+                            <h2>
+                                <a href="/single-product?toyID=<%= val.toyID %>">
+                                    <%= val.toyName %>
+                                </a>
+                            </h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Top New</h2>
+                    <a href="/listToys" class="wid-view-more">View All</a>
+                    <% locals.dataTopNew.forEach((val)=> {%>
+                        <div class="single-wid-product">
+                            <a href="/single-product?toyID=<%= val.toyID %>">
+                                <img src="<%= val.img1 %>" alt="" class="product-thumb">
+                            </a>
+                            <h2>
+                                <a href="/single-product?toyID=<%= val.toyID %>">
+                                    <%= val.toyName %>
+                                </a>
+                            </h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>$<%= val.price %></ins> <del>$<%= val.price + val.price*20/100 %></del>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End product widget area -->

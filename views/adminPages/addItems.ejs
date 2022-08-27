@@ -1,0 +1,131 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>
+                        Load item to inventory
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <form class="form-add-staff" style="font-size: 18px;">
+                <div class="form-group">
+                    <label for="toyID">ID toy</label>
+                    <select name="toyID" id="toyID" style="width: 100%;">
+                        <option value="None">New item</option>
+                        <% locals.allItems.forEach(val=> {%>
+                            <option value="<%=val.toyID%>">
+                                <%= val.toyID %> - <%= val.toyName %>
+                            </option>
+                            <%})%>
+                    </select>
+                </div>
+                <div class="form-group" id="toyName_area">
+                    <label for="toyName">Toy name</label>
+                    <input placeholder="toyName number" type="text" class="form-control" id="toyName">
+                </div>
+                <div class="form-group" id="typeID_area">
+                    <label for="typeID">Type</label>
+                    <br>
+                    <select name="typeID" id="typeID">
+                        <option value="LXR">Luxury</option>
+                        <option value="PPL">Popular</option>
+                    </select>
+                </div>
+                <div class="form-group" id="toyDesc_area">
+                    <label for="descToy">Description</label>
+                    <textarea placeholder="descToy" type="text" class="form-control" id="descToy" rows="4"></textarea>
+                </div>
+                <div class="form-group" id="origin_area">
+                    <label for="origin">original</label>
+                    <input placeholder="origin" type="text" class="form-control" id="origin">
+                </div>
+                <div class="form-group">
+                    <label for="qty">Quantity</label>
+                    <input placeholder="qty" type="number" class="form-control" id="qty">
+                </div>
+                <div class="form-group">
+                    <label for="inputPrice">Input price</label>
+                    <input placeholder="inputPrice" type="number" class="form-control" id="inputPrice">
+                </div>
+                <div class="form-group">
+                    <label for="salePrice">Sale price</label>
+                    <input placeholder="salePrice" type="number" class="form-control" id="salePrice">
+                </div>
+                <div class="form-group" id="img1_area">
+                    <label for="img1">Image</label>
+                    <input placeholder="img1" type="text" class="form-control" id="img1">
+                </div>
+                <button type="submit" class="btn btn-default" id="btn_add_item">Add item</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    let toyID = document.getElementById('toyID')
+    toyID.addEventListener('change', (e) => {
+        let toyName_area = document.getElementById('toyName_area')
+        let typeID_area = document.getElementById('typeID_area')
+        let toyDesc_area = document.getElementById('toyDesc_area')
+        let origin_area = document.getElementById('origin_area')
+        let img1_area = document.getElementById('img1_area')
+        if (e.target.value === 'None') {
+            toyName_area.style.display = 'block'
+            typeID_area.style.display = 'block'
+            toyDesc_area.style.display = 'block'
+            origin_area.style.display = 'block'
+            img1_area.style.display = 'block'
+        }
+        else {
+            toyName_area.style.display = 'none'
+            typeID_area.style.display = 'none'
+            toyDesc_area.style.display = 'none'
+            origin_area.style.display = 'none'
+            img1_area.style.display = 'none'
+        }
+
+    })
+
+    let btn_add_item = document.getElementById('btn_add_item')
+    btn_add_item.addEventListener('click', (e) => {
+        e.preventDefault()
+        let toyID
+        document.getElementById('toyID').value === 'None' ? toyID = '' : toyID = document.getElementById('toyID').value
+        let toyName = document.getElementById('toyName').value || ''
+        let typeID = document.getElementById('typeID').value
+        let descToy = document.getElementById('descToy').value
+        let origin = document.getElementById('origin').value
+        let qty = document.getElementById('qty').value
+        let inputPrice = document.getElementById('inputPrice').value
+        let salePrice = document.getElementById('salePrice').value
+        let img1 = document.getElementById('img1').value
+        if (qty && inputPrice && salePrice) {
+            console.log(img1)
+            fetch('/admin/addItems', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ toyID, toyName, typeID, descToy, origin, qty, inputPrice, salePrice, img1 })
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        alert('You just have added toys')
+                        window.location.href = ''
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            console.log(('not ok'));
+        }
+    })
+</script>

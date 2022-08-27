@@ -1,0 +1,144 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>
+                        List ordered bills
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <table class="table table-bordered" style="font-size: 18px;">
+                <thead>
+                    <tr>
+                        <th>ID BILL</th>
+                        <th>CUSTOMER NAME</th>
+                        <th>ADDRESS</th>
+                        <th>PHONE NUMBER</th>
+                        <th>TOTAL</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% locals.waitingBills.forEach(val=> {%>
+                        <tr id="<%= val.saleBillID %>">
+                            <th>
+                                <%= val.saleBillID %>
+                            </th>
+                            <td>
+                                <%= val.customerName %>
+                            </td>
+                            <td>
+                                <%= val.address %>
+                            </td>
+                            <td>
+                                <%= val.phone %>
+                            </td>
+                            <td>
+                                <%= val.total %>$
+                            </td>
+                            <td>
+                                <button data-id="<%= val.saleBillID %>" type="button"
+                                    class="btn btn-success btn_update">
+                                    <i data-id="<%= val.saleBillID %>" class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                                <button data-id="<%= val.saleBillID %>" type="button" class="btn btn-danger btn_delete">
+                                    <i data-id="<%= val.saleBillID %>" class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <a href="/admin/billDetails?saleBillID=<%=val.saleBillID%>&type=order">
+                                    <button type="button" class="btn btn-info">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+
+                            </td>
+                        </tr>
+                        <%}) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="?pageNow=<%= locals.pageNow - 1 %>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(i=1; i <=locals.countPage; i++){%>
+                                <li class="<%= pageNow === i ? 'active': ''%>"><a href="?pageNow=<%= i %>">
+                                        <%= i %>
+                                    </a></li>
+                                <%}%>
+                                    <li>
+                                        <a href="?pageNow=<%= locals.pageNow + 1 %>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //update
+    let btn_update = document.querySelectorAll('.btn_update')
+    for (let i = 0; i < btn_update.length; i++) {
+        btn_update[i].addEventListener('click', (e) => {
+            let saleBillID = e.target.dataset.id
+            fetch('/admin/doneBill', {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ saleBillID })
+            })
+                .then(data => data.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.code === 0) {
+                        alert(`You have been completed ${saleBillID}`)
+                        window.location.href = ''
+                    }
+                    if (data.code === 3) {
+                        alert(data.message)
+                    }
+                })
+                .catch(err => console.log(err))
+        })
+    }
+
+    //delete
+    let btn_delete = document.getElementsByClassName('btn_delete')
+    for (let i = 0; i < btn_delete.length; i++) {
+        btn_delete[i].addEventListener('click', (e) => {
+            let saleBillID = e.target.dataset.id
+            fetch('/admin/deleteOrderBill', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ saleBillID })
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        alert(`You have been deleted ${saleBillID}`)
+                        window.location.href = ''
+                    }
+                })
+                .catch(err => console.log(err))
+        })
+    }
+</script>

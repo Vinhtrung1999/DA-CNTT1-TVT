@@ -1,0 +1,47 @@
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>
+                        <%= staffDetails.staffID %>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="card-profile text-center">
+            <div class="card-profile-header">
+                <img src="https://iconape.com/wp-content/png_logo_vector/user-circle.png" alt=""
+                    style="width: 150px; height: 150px;">
+            </div>
+            <div class="card-profile-body">
+                <div>
+                    <%=staffDetails.staffName %>
+                </div>
+                <div>
+                    <%=staffDetails.gender %>
+                </div>
+                <div>
+                    <%=staffDetails.phone %>
+                </div>
+                <div>
+                    <%=staffDetails.position=='MNG' ? 'Manager' : 'Staff' %>
+                </div>
+                <div>
+                    <%=staffDetails.salary %>
+                </div>
+                <div>***************</div>
+                <a href="/admin/listStaffs">
+                    <button class="btn btn-default" style="margin-bottom: 20px;">
+                        back
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
