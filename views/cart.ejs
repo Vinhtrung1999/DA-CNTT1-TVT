@@ -168,7 +168,7 @@
                 .then(data => {
                     if (data.code === 0) {
                         localStorage.setItem('cart', JSON.stringify([]))
-                        swal("Order successfully", "You click the button to continue!", "success")
+                        swal("Order successfully", "Click the button to continue!", "success")
                             .then(() => {
                                 window.location.href = ''
                             })
@@ -176,7 +176,7 @@
                 })
         }
         else {
-            swal("Oops!", "You enter entire information", "warning")
+            swal("Oops!", "Enter entire information", "warning")
         }
 
     })

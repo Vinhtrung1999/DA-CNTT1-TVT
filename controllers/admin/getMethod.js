@@ -50,7 +50,8 @@ let adminHome = async (req, res) => {
 }
 
 let login = (req, res) => {
-    return res.render('login')
+    let { err } = req.query
+    return res.render('login', { err })
 }
 
 let profile = async (req, res) => {

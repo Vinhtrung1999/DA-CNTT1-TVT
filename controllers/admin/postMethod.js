@@ -13,9 +13,9 @@ let postLogin = async (req, res) => {
                 else
                     return res.redirect('/admin/listStaffs')
             }
-            return res.redirect('/admin/login')
+            return res.redirect('/admin/login?err=username%20or%20password%20wrong')
         } catch (err) {
-            return res.redirect('/admin/login')
+            return res.redirect('/admin/login?err=username%20or%20password%20wrong')
         }
     }
     return res.redirect('/admin/login')

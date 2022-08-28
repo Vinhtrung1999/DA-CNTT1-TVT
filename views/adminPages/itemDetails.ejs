@@ -15,6 +15,9 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <form class="form-add-staff" style="font-size: 18px;" action="/admin/updateItem" method="post">
+            <div class="text-center">
+                <img src="<%= dataItem.img1 %>" alt="img" style="width: 50%; margin: 10px;">
+            </div>
             <input type="hidden" value="<%= dataItem.toyID %>" name="toyID" id="toyID">
             <div class="form-group" id="toyName_area">
                 <label for="toyName">Toy name</label>
@@ -61,7 +64,6 @@
                     value="<%= dataItem.img1 %>">
             </div>
             <div class="form-group" id="img1_area">
-                <img src="<%= dataItem.img1 %>" alt="img" style="width: 50%; margin: 10px;">
                 <button type="submit" class="btn btn-default" id="btn_add_item">update item</button>
             </div>
         </form>

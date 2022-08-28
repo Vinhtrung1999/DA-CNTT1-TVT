@@ -405,6 +405,16 @@ iframe {
   opacity: 1;
 }
 
+.err-login {
+  color: #ffffff;
+  background-color: red;
+  padding: 2px 5px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: small;
+  font-weight: 800;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;

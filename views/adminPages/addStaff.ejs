@@ -68,8 +68,10 @@
                 .then(data => data.json())
                 .then(data => {
                     if (data.code === 0) {
-                        alert(`You just have added new staff.`)
-                        window.location.href = ''
+                        swal("You have just added a new staff", "Click the button to continue!", "success")
+                            .then(() => {
+                                window.location.href = ''
+                            })
                     }
                 })
         }

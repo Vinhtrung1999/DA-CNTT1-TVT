@@ -22,9 +22,8 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="/admin/postLogin" method="post">
 					<span class="login100-form-title">
-						tvt Toys
+						E-Toys
 					</span>
-
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter staffID">
 						<input class="input100" type="text" name="staffID" placeholder="staffID">
 						<span class="focus-input100"></span>
@@ -35,9 +34,14 @@
 						<span class="focus-input100"></span>
 					</div>
 					<div class="container-login100-form-btn my-5">
-						<button class="login100-form-btn" type="submit">
-							Login
-						</button>
+						<% if(locals.err){ %>
+							<div class="err-login">
+								<%= locals.err %>
+							</div>
+							<% } %>
+								<button class="login100-form-btn" type="submit">
+									Login
+								</button>
 					</div>
 				</form>
 			</div>

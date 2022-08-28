@@ -106,13 +106,14 @@
             })
                 .then(data => data.json())
                 .then(data => {
-                    console.log(data);
                     if (data.code === 0) {
-                        alert(`You have been completed ${saleBillID}`)
-                        window.location.href = ''
+                        swal("This bill is completed successfully", "You click the button to continue!", "success")
+                            .then(() => {
+                                window.location.href = ''
+                            })
                     }
                     if (data.code === 3) {
-                        alert(data.message)
+                        swal("Oops", `${data.message} in storage`, "warning")
                     }
                 })
                 .catch(err => console.log(err))
@@ -134,8 +135,10 @@
                 .then(data => data.json())
                 .then(data => {
                     if (data.code === 0) {
-                        alert(`You have been deleted ${saleBillID}`)
-                        window.location.href = ''
+                        swal(`You have been deleted the bill ${saleBillID}`, "Click the button to continue!", "success")
+                            .then(() => {
+                                window.location.href = ''
+                            })
                     }
                 })
                 .catch(err => console.log(err))
