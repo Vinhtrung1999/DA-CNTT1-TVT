@@ -1,0 +1,98 @@
+<div class="product-big-title-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="product-bit-title text-center">
+          <h2>
+            Report
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="single-product-area">
+  <div class="zigzag-bottom"></div>
+  <div class="container">
+    <div class="row">
+      <div style="width: 50%; margin: auto;">
+        <canvas id="myChartBar"></canvas>
+      </div>
+      <div>
+        <canvas id="myChartLine"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  fetch('/admin/getReport', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(data => data.json())
+    .then(data => {
+      if (data.code === 0) {
+        // bar-----------------------------------------
+        const labelsBar = ['Revenue', 'Cost', 'profit']
+        const dataBar = {
+          labels: labelsBar,
+          datasets: [{
+            label: 'Total revenue & total cost ($)',
+            data: [data.data.totalRevenue, data.data.totalCost, data.data.totalRevenue - data.data.totalCost],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(75, 192, 192)',
+            ],
+            borderWidth: 1
+          }]
+        };
+        const configBar = {
+          type: 'bar',
+          data: dataBar,
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          },
+        };
+        const myChartBar = new Chart(
+          document.getElementById('myChartBar'),
+          configBar
+        );
+
+        //Line---------------------
+        const labelsLine = data.data.dataReport.map(val => val.saleDate.split('T')[0]);
+        const dataLineSum = data.data.dataReport.map(val => val.sum);
+
+        const dataLine = {
+          labels: labelsLine,
+          datasets: [{
+            label: 'Total revenue per day ($)',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: dataLineSum,
+          }]
+        };
+
+        const configLine = {
+          type: 'line',
+          data: dataLine,
+          options: {}
+        };
+
+        const myChartLine = new Chart(
+          document.getElementById('myChartLine'),
+          configLine
+        );
+
+      }
+    })
+</script>

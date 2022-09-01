@@ -68,12 +68,15 @@
                 .then(data => data.json())
                 .then(data => {
                     if (data.code === 0) {
-                        swal("You have just added a new staff", "Click the button to continue!", "success")
+                        swal("Success", "Click the button to continue!", "success")
                             .then(() => {
                                 window.location.href = ''
                             })
                     }
                 })
+        }
+        else {
+            swal("Oops!", "Enter entire information", "warning")
         }
     })
 </script>

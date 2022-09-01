@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <% for(i=1; i <=locals.countPage; i++){%>
-                                <li><a href="?pageNow=<%= i %>">
+                                <li class="<%= pageNow === i ? 'active': ''%>"><a href="?pageNow=<%= i %>">
                                         <%= i %>
                                     </a></li>
                                 <%}%>

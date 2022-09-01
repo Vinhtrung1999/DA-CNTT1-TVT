@@ -22,7 +22,7 @@ let doneBill = async (req, res) => {
                 let valUpdate = []
                 for (let i = 0; i < listToys.length; i++) {
                     if (listToys[i].qty < billDetails[i].qty)
-                        return res.json({ code: 3, message: `${listToys[i].toyID} only have ${listToys[i].qty}` })
+                        return res.json({ code: 3, message: `[-${listToys[i].toyID}-] only have ${listToys[i].qty}` })
                     valUpdate = [...valUpdate, { toyID: listToys[i].toyID, qty: listToys[i].qty - billDetails[i].qty }]
                 }
 
